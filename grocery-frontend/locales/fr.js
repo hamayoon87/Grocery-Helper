@@ -1,0 +1,22 @@
+console.log('Loaded French locale');
+export default {
+  login: 'Connexion',
+  signup: 'S\'inscrire',
+  username: 'Nom d\'utilisateur',
+  password: 'Mot de passe',
+  switchToSignup: 'Passer à l\'inscription',
+  switchToLogin: 'Passer à la connexion',
+  groceryList: 'Liste de courses',
+  logout: 'Déconnexion',
+  addItemPlaceholder: 'Ajouter un article',
+  add: 'Ajouter',
+  noItems: 'Aucun article',
+  validationMessage: 'Veuillez saisir le nom d\'utilisateur et le mot de passe',
+  error: 'Erreur',
+  failedToAuth: 'Échec de l\'authentification',
+  serverUnreachable: 'Serveur inaccessible',
+  fetchFailed: 'Échec du chargement des articles',
+  addItemError: 'Échec de l\'ajout de l\'article',
+  updateItemError: 'Échec de la mise à jour de l\'article',
+  serverError: 'Erreur serveur',
+};

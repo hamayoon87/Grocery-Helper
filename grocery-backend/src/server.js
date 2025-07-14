@@ -11,7 +11,7 @@ app.use(express.json());
 const JWT_SECRET = 'your_jwt_secret_here'; // Replace with strong secret in production
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://Cluster99794:Cluster99794_MongoDB123..@cluster99794.tjzxluh.mongodb.net/', {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

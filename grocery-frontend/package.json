@@ -1,7 +1,24 @@
 {
+  "name": "grocery-helper",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^2.2.0",
-    "expo": "^53.0.19",
-    "react-native": "^0.80.1"
-  }
+    "@react-native-async-storage/async-storage": "^1.24.0",
+    "expo": "~53.0.17",
+    "expo-localization": "^16.1.6",
+    "expo-status-bar": "~2.2.3",
+    "i18n-js": "^4.5.1",
+    "react": "19.0.0",
+    "react-native": "0.79.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0"
+  },
+  "private": true
 }

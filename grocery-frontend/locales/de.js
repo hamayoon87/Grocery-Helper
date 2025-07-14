@@ -1,0 +1,22 @@
+console.log('Loaded German locale');
+export default {
+  login: 'Anmelden',
+  signup: 'Registrieren',
+  username: 'Benutzername',
+  password: 'Passwort',
+  switchToSignup: 'Wechseln zu Registrieren',
+  switchToLogin: 'Wechseln zu Anmelden',
+  groceryList: 'Einkaufsliste',
+  logout: 'Abmelden',
+  addItemPlaceholder: 'Artikel hinzufügen',
+  add: 'Hinzufügen',
+  noItems: 'Keine Artikel',
+  validationMessage: 'Bitte Benutzername und Passwort eingeben',
+  error: 'Fehler',
+  failedToAuth: 'Authentifizierung fehlgeschlagen',
+  serverUnreachable: 'Server nicht erreichbar',
+  fetchFailed: 'Fehler beim Laden der Artikel',
+  addItemError: 'Fehler beim Hinzufügen des Artikels',
+  updateItemError: 'Fehler beim Aktualisieren des Artikels',
+  serverError: 'Serverfehler',
+};

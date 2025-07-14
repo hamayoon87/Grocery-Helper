@@ -1,0 +1,22 @@
+console.log('Loaded English locale');
+export default {
+  login: 'Login',
+  signup: 'Sign Up',
+  username: 'Username',
+  password: 'Password',
+  switchToSignup: 'Switch to Sign Up',
+  switchToLogin: 'Switch to Login',
+  groceryList: 'Grocery List',
+  logout: 'Logout',
+  addItemPlaceholder: 'Add grocery item',
+  add: 'Add',
+  noItems: 'No items',
+  validationMessage: 'Please enter username and password',
+  error: 'Error',
+  failedToAuth: 'Failed to authenticate',
+  serverUnreachable: 'Server not reachable',
+  fetchFailed: 'Failed to fetch items',
+  addItemError: 'Failed to add item',
+  updateItemError: 'Failed to update item',
+  serverError: 'Server error',
+};
