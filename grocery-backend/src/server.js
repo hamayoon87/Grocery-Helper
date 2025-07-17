@@ -109,14 +109,15 @@ app.put('/items/:id/toggle', authMiddleware, async (req, res) => {
 app.put('/items/:id', authenticateToken, async (req, res) => {
   const { name } = req.body;
   try {
-    const updated = await Item.findByIdAndUpdate(
-      req.params.id,
+    const updated = await GroceryItem.findOneAndUpdate(
+      { _id: req.params.id, userId: req.user.id }, // secure by user
       { name },
       { new: true }
     );
     if (!updated) return res.status(404).json({ message: 'Item not found' });
     res.json(updated);
   } catch (err) {
+    console.error(err); // Add this to see backend errors
     res.status(500).json({ message: 'Server error' });
   }
 });
