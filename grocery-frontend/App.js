@@ -20,6 +20,9 @@ export default function App() {
   const [newItem, setNewItem] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [editingItemId, setEditingItemId] = useState(null);
+  const [editingText, setEditingText] = useState('');
+
 
   useEffect(() => {
     loadToken();
@@ -110,6 +113,29 @@ export default function App() {
       Alert.alert(i18n.t('error'), i18n.t('serverError'));
     }
   }
+
+  async function editItem(id) {
+    try {
+      const res = await fetch(`${API_URL}/items/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ name: editingText }),
+      });
+      if (res.ok) {
+        setEditingItemId(null);
+        setEditingText('');
+        fetchItems();
+      } else {
+        Alert.alert(i18n.t('error'), 'Failed to edit item.');
+      }
+    } catch {
+      Alert.alert(i18n.t('error'), i18n.t('serverError'));
+    }
+  }
+
 
   async function deleteItem(id) {
     try {
@@ -247,14 +273,44 @@ export default function App() {
             onPress={() => toggleDone(item._id)}
             style={[styles.listItem, { backgroundColor: colors.inputBackground }]}
           >
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <Text style={[styles.itemText, item.done && styles.doneItem, { color: colors.text }]}>
-                {item.name}
-              </Text>
-              <TouchableOpacity onPress={() => deleteItem(item._id)}>
-                <Text style={{ color: 'red', marginLeft: 10 }}>✕</Text>
-              </TouchableOpacity>
-            </View>
+            {editingItemId === item._id ? (
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <TextInput
+                  value={editingText}
+                  onChangeText={setEditingText}
+                  style={[
+                    styles.input,
+                    {
+                      flex: 1,
+                      color: colors.text,
+                      borderColor: colors.inputBorder,
+                      marginRight: 8,
+                    },
+                  ]}
+                />
+                <TouchableOpacity onPress={() => editItem(item._id)}>
+                  <Text style={{ color: 'green', marginRight: 8 }}>💾</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setEditingItemId(null)}>
+                  <Text style={{ color: 'gray' }}>✖</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Text style={[styles.itemText, item.done && styles.doneItem, { color: colors.text, flex: 1 }]}>
+                  {item.name}
+                </Text>
+                <TouchableOpacity onPress={() => {
+                  setEditingItemId(item._id);
+                  setEditingText(item.name);
+                }}>
+                  <Text style={{ color: 'orange', marginRight: 10 }}>✎</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => deleteItem(item._id)}>
+                  <Text style={{ color: 'red' }}>✕</Text>
+                </TouchableOpacity>
+              </View>
+            )}
           </TouchableOpacity>
         )}
         ListEmptyComponent={<Text style={[styles.emptyText, { color: colors.text }]}>{i18n.t('noItems')}</Text>}
