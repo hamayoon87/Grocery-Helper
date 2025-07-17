@@ -105,6 +105,22 @@ app.put('/items/:id/toggle', authMiddleware, async (req, res) => {
   res.json(item);
 });
 
+// Edit item name
+app.put('/items/:id', authenticateToken, async (req, res) => {
+  const { name } = req.body;
+  try {
+    const updated = await Item.findByIdAndUpdate(
+      req.params.id,
+      { name },
+      { new: true }
+    );
+    if (!updated) return res.status(404).json({ message: 'Item not found' });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // Delete item
 app.delete('/items/:id', authMiddleware, async (req, res) => {
   await GroceryItem.deleteOne({ _id: req.params.id, userId: req.user.id });
