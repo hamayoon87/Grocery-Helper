@@ -111,6 +111,22 @@ export default function App() {
     }
   }
 
+  async function deleteItem(id) {
+    try {
+      const res = await fetch(`${API_URL}/items/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        fetchItems(); // Refresh the list
+      } else {
+        Alert.alert(i18n.t('error'), 'Failed to delete item.');
+      }
+    } catch {
+      Alert.alert(i18n.t('error'), i18n.t('serverError'));
+    }
+  }
+
   async function toggleDone(id) {
     try {
       await fetch(`${API_URL}/items/${id}/toggle`, {
@@ -223,6 +239,27 @@ export default function App() {
         <Button title={i18n.t('add')} onPress={addItem} color={colors.button} />
       </View>
 
+      <FlatList
+        data={items}
+        keyExtractor={(item) => item._id}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => toggleDone(item._id)}
+            style={[styles.listItem, { backgroundColor: colors.inputBackground }]}
+          >
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={[styles.itemText, item.done && styles.doneItem, { color: colors.text }]}>
+                {item.name}
+              </Text>
+              <TouchableOpacity onPress={() => deleteItem(item._id)}>
+                <Text style={{ color: 'red', marginLeft: 10 }}>✕</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        )}
+        ListEmptyComponent={<Text style={[styles.emptyText, { color: colors.text }]}>{i18n.t('noItems')}</Text>}
+      />
+            
       <FlatList
         data={items}
         keyExtractor={(item) => item._id}
