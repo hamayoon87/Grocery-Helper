@@ -106,7 +106,7 @@ app.put('/items/:id/toggle', authMiddleware, async (req, res) => {
 });
 
 // Edit item name
-app.put('/items/:id', authenticateToken, async (req, res) => {
+app.put('/items/:id', authMiddleware, async (req, res) => {
   const { name } = req.body;
   try {
     const updated = await GroceryItem.findOneAndUpdate(
