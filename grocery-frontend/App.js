@@ -259,22 +259,6 @@ export default function App() {
         )}
         ListEmptyComponent={<Text style={[styles.emptyText, { color: colors.text }]}>{i18n.t('noItems')}</Text>}
       />
-            
-      <FlatList
-        data={items}
-        keyExtractor={(item) => item._id}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => toggleDone(item._id)}
-            style={[styles.listItem, { backgroundColor: colors.inputBackground }]}
-          >
-            <Text style={[styles.itemText, item.done && styles.doneItem, { color: colors.text }]}>
-              {item.name}
-            </Text>
-          </TouchableOpacity>
-        )}
-        ListEmptyComponent={<Text style={[styles.emptyText, { color: colors.text }]}>{i18n.t('noItems')}</Text>}
-      />
     </SafeAreaView>
   );
 }
